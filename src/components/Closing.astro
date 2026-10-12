@@ -25,20 +25,18 @@ const year = new Date().getFullYear();
   .closing {
     background: var(--navy);
     color: var(--white);
-    padding-top: var(--section);
+    padding-top: clamp(3rem, 5.5vw, 4.5rem);
   }
   .closing :global(p) {
-    max-width: 44rem;
-    font-size: clamp(1.25rem, 2vw, 1.7rem);
-    line-height: 1.45;
+    max-width: 40rem;
   }
   .contact {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.35rem;
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding-bottom: var(--section);
+    margin-top: clamp(2rem, 4vw, 3rem);
+    padding-bottom: clamp(3rem, 5.5vw, 4.5rem);
   }
   .name {
     font-size: clamp(1.3rem, 2vw, 1.7rem);

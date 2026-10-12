@@ -24,8 +24,8 @@ Then open http://localhost:4321.
 
 ```
 src/
-  assets/          hero.jpg, harbor.jpg (crop of the hero), portrait.jpg
-  components/      Header, Hero, Tile (photo + text split), Closing, BaseHead
+  assets/          hero.jpg (social preview only), harbor.jpg, portrait.jpg
+  components/      Masthead (letterhead), Tile (photo + text), Closing, BaseHead
   copy/home.md     The four bio paragraphs, one per screen
   layouts/         BaseLayout wraps every page and runs the fade-up script
   pages/           index.astro and 404.astro

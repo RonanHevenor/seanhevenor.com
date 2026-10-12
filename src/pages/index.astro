@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
+import Masthead from '../components/Masthead.astro';
 import Tile from '../components/Tile.astro';
 import Closing from '../components/Closing.astro';
 import harbor from '../assets/harbor.jpg';
@@ -9,28 +8,25 @@ import portrait from '../assets/portrait.jpg';
 import { frontmatter, rawContent } from '../copy/home.md';
 import { SITE } from '../site.config';
 
-// home.md holds four paragraphs. Each gets its own screen, in order:
-// statement, the place, the person, the close.
-const [statement, place, person, close] = rawContent().trim().split(/\n\s*\n/);
+// home.md holds four paragraphs, in order:
+// the person (with portrait), the place (with harbor), a statement, the close.
+const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
 ---
 
 <BaseLayout pageTitle={frontmatter.title} description={frontmatter.description}>
-  <Header />
-  <Hero />
+  <Masthead />
 
-  <section class="statement">
-    <div class="container reveal">
-      <p>{statement}</p>
-    </div>
-  </section>
+  <Tile image={portrait} alt={SITE.title} side="left" ratio="4 / 5" position="50% 20%" eager reveal={false} small>
+    <p>{person}</p>
+  </Tile>
 
-  <Tile image={harbor} side="left" ratio="5 / 4">
+  <Tile image={harbor} side="right" ratio="4 / 3">
     <p>{place}</p>
   </Tile>
 
-  <Tile image={portrait} alt={SITE.title} side="right" ratio="1 / 1" position="50% 30%">
-    <p>{person}</p>
-  </Tile>
+  <section class="container statement reveal">
+    <p>{statement}</p>
+  </section>
 
   <Closing>
     <p>{close}</p>
@@ -39,11 +35,10 @@ const [statement, place, person, close] = rawContent().trim().split(/\n\s*\n/);
 
 <style>
   .statement {
-    padding: var(--section) 0;
+    padding-top: clamp(1.5rem, 3vw, 2.5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
   .statement p {
-    max-width: 58rem;
-    font-size: clamp(1.5rem, 2.7vw, 2.3rem);
-    line-height: 1.4;
+    max-width: 40rem;
   }
 </style>

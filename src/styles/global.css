@@ -13,7 +13,7 @@
 
   --max: 88rem;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --section: clamp(5rem, 10vw, 9rem);
+  --section: clamp(3rem, 5.5vw, 5rem);
 }
 
 *,
@@ -62,6 +62,14 @@ a:hover {
 
 p {
   margin: 0;
+}
+
+/* Body copy: one size across the whole page */
+.tile p,
+.statement p,
+.closing p {
+  font-size: clamp(1.1rem, 1.35vw, 1.3rem);
+  line-height: 1.65;
 }
 
 img {

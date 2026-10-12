@@ -8,26 +8,54 @@ interface Props {
   side?: 'left' | 'right';
   ratio?: string;
   position?: string;
+  eager?: boolean;
+  reveal?: boolean;
+  small?: boolean;
 }
 
-const { image, alt = '', side = 'left', ratio = '5 / 4', position = '50% 50%' } = Astro.props;
+const {
+  image,
+  alt = '',
+  side = 'left',
+  ratio = '4 / 3',
+  position = '50% 50%',
+  eager = false,
+  reveal = true,
+  small = false,
+} = Astro.props;
 ---
 
-<section class:list={['tile', `tile--${side}`, 'reveal']}>
+<section class:list={['container', 'tile', `tile--${side}`, { reveal, 'tile--small': small }]}>
   <div class="photo" style={`--ratio: ${ratio}; --pos: ${position};`}>
-    <Image src={image} alt={alt} widths={[640, 960, 1280, 1920]} sizes="(max-width: 48rem) 100vw, 50vw" quality={85} />
+    <Image
+      src={image}
+      alt={alt}
+      widths={[480, 720, 960, 1440]}
+      sizes="(max-width: 48rem) 100vw, 40vw"
+      quality={85}
+      loading={eager ? 'eager' : 'lazy'}
+    />
   </div>
   <div class="copy">
-    <div class="copy-inner">
-      <slot />
-    </div>
+    <slot />
   </div>
 </section>
 
 <style>
   .tile {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 7fr;
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    padding-top: clamp(2.5rem, 5vw, 4.5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+  .tile--right {
+    grid-template-columns: 7fr 5fr;
+  }
+  /* A modest photo column, for the headshot */
+  .tile--small {
+    grid-template-columns: clamp(13rem, 24vw, 20rem) 1fr;
   }
   .tile--right .photo {
     order: 2;
@@ -46,39 +74,25 @@ const { image, alt = '', side = 'left', ratio = '5 / 4', position = '50% 50%' } 
     object-position: var(--pos);
   }
   .copy {
-    display: flex;
-    align-items: center;
-    padding: clamp(3rem, 6vw, 6rem) var(--gutter);
-  }
-  .copy-inner {
-    max-width: 34rem;
-    font-size: clamp(1.15rem, 1.7vw, 1.5rem);
-    line-height: 1.6;
-  }
-  /* Keep the text column's inner edge aligned with the page gutter */
-  .tile--left .copy {
-    justify-content: flex-start;
-    padding-left: clamp(2.5rem, 6vw, 6rem);
+    max-width: 40rem;
   }
   .tile--right .copy {
-    justify-content: flex-end;
-    padding-right: clamp(2.5rem, 6vw, 6rem);
+    justify-self: start;
   }
   @media (max-width: 48rem) {
-    .tile {
+    .tile,
+    .tile--right,
+    .tile--small {
       grid-template-columns: 1fr;
+      row-gap: 1.5rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
     }
     .tile--right .photo {
       order: 0;
     }
-    .photo {
-      aspect-ratio: 4 / 3;
-    }
-    .copy,
-    .tile--left .copy,
-    .tile--right .copy {
-      padding: 2.5rem var(--gutter) 3.5rem;
-      justify-content: flex-start;
+    .tile--small .photo {
+      max-width: 16rem;
     }
   }
 </style>
