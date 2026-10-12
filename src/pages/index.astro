@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site.config';
+---
+
+<BaseLayout>
+  <h1>{SITE.title}</h1>
+  <p class="muted">{SITE.description}</p>
+  <p>
+    This is a starter template built with <a href="https://astro.build">Astro</a>.
+    Edit <code>src/site.config.ts</code> to change the title, navigation, and
+    social links, then replace the content of the pages in <code>src/pages/</code>.
+  </p>
+</BaseLayout>
