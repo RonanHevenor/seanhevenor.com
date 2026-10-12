@@ -13,6 +13,7 @@
   --max: 70rem;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --space: clamp(3rem, 6vw, 5.5rem);
+  --para: clamp(1.75rem, 3.3vw, 3rem);
   --col: clamp(12rem, 20vw, 17rem);
   --colgap: clamp(2rem, 5vw, 5rem);
 }
@@ -88,6 +89,7 @@ p {
 
 /* Body copy: one size across the whole page */
 .tile p,
+.place p,
 .statement p,
 .closing p {
   font-size: clamp(1.1rem, 1.35vw, 1.3rem);

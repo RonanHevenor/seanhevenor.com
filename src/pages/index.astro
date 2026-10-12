@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Masthead from '../components/Masthead.astro';
 import Tile from '../components/Tile.astro';
 import Closing from '../components/Closing.astro';
-import harbor from '../assets/harbor.jpg';
 import portrait from '../assets/portrait.jpg';
 import { Image } from 'astro:assets';
 import aerial from '../assets/hero.jpg';
@@ -11,7 +10,7 @@ import { frontmatter, rawContent } from '../copy/home.md';
 import { SITE } from '../site.config';
 
 // home.md holds four paragraphs, in order:
-// the person (with portrait), the place (with harbor), a statement, the close.
+// the person (with portrait), the place, a statement, the close.
 const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
 ---
 
@@ -20,9 +19,6 @@ const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
 
   <Tile image={portrait} alt={SITE.title} ratio="4 / 5" position="50% 20%" eager reveal={false}>
     <p>{person}</p>
-  </Tile>
-
-  <Tile image={harbor} ratio="4 / 3">
     <p>{place}</p>
   </Tile>
 
@@ -50,12 +46,11 @@ const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
 
 <style>
   .statement {
-    padding-top: var(--space);
+    padding-top: var(--para);
   }
   /* The last two paragraphs sit on a whitened copy of the aerial. */
   .finale {
     position: relative;
-    margin-top: var(--space);
     isolation: isolate;
     overflow: hidden;
   }
