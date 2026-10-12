@@ -1,29 +1,56 @@
 ---
+import { getImage } from 'astro:assets';
 import { SITE } from '../site.config';
+import hero from '../assets/hero.jpg';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
+  pageTitle?: string;
   description?: string;
 }
 
-const { title, description = SITE.description } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+const { title, pageTitle, description = SITE.description } = Astro.props;
+const fullTitle = pageTitle ?? [title, SITE.title].filter(Boolean).join(' · ');
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const og = await getImage({ src: hero, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const ogImage = new URL(og.src, Astro.site);
+
+// Structured data for search engines. Uses only the words in site.config.ts.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: SITE.title,
+  description: SITE.tagline,
+  url: Astro.site?.toString(),
+  image: ogImage.toString(),
+  areaServed: [...SITE.areas, ...SITE.alsoServes].map((name) => ({ '@type': 'Place', name })),
+};
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#1f5f9a" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="canonical" href={canonical} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <title>{fullTitle}</title>
-<meta name="description" content={description} />
+{description && <meta name="description" content={description} />}
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonical} />
-<meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
-<meta name="twitter:card" content="summary" />
+<meta property="og:site_name" content={SITE.title} />
+{fullTitle && <meta property="og:title" content={fullTitle} />}
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

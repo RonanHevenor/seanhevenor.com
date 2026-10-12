@@ -5,16 +5,18 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
+  /** Full <title> text, used as-is (no site name appended). */
+  pageTitle?: string;
   description?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, pageTitle, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} pageTitle={pageTitle} description={description} />
   </head>
   <body>
     <Header />

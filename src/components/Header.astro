@@ -3,54 +3,74 @@ import { SITE } from '../site.config';
 const current = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? current === '/' : current.startsWith(href);
+const showBrand = Boolean(SITE.title) && current !== '/';
+const hasContent = showBrand || SITE.nav.length > 0;
 ---
 
-<header>
-  <nav>
-    <a class="brand" href="/">{SITE.title}</a>
-    <ul>
-      {SITE.nav.map((item) => (
-        <li>
-          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-</header>
+{hasContent && (
+  <header>
+    <nav class="container">
+      {showBrand && <a class="brand" href="/">{SITE.title}</a>}
+      {SITE.nav.length > 0 && (
+        <ul>
+          {SITE.nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </nav>
+  </header>
+)}
 
 <style>
   header {
-    border-bottom: 1px solid var(--border);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
   nav {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
   .brand {
-    font-weight: 700;
-    color: var(--fg);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: inherit;
   }
   ul {
     list-style: none;
     display: flex;
-    gap: 1.25rem;
+    gap: 1.75rem;
     margin: 0;
     padding: 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
   li a {
-    color: var(--muted);
+    color: inherit;
+    opacity: 0.85;
   }
   li a:hover,
   li a[aria-current='page'] {
-    color: var(--fg);
+    opacity: 1;
     text-decoration: none;
+    border-bottom: 1px solid var(--brass);
   }
 </style>

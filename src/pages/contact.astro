@@ -1,14 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../site.config';
 ---
 
-<BaseLayout title="Contact" description="How to get in touch.">
-  <h1>Contact</h1>
-  <p>The best way to reach me is through one of these:</p>
-  <ul>
-    {SITE.social.map((s) => (
-      <li><a href={s.href}>{s.label}</a></li>
-    ))}
-  </ul>
+<BaseLayout>
+  <div class="container">
+    <div class="prose">
+      <!-- Page copy goes here. -->
+    </div>
+  </div>
 </BaseLayout>

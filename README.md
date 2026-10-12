@@ -15,18 +15,24 @@ Then open http://localhost:4321.
 
 ## Make it yours
 
+The site ships with **no text at all**. Every string in `src/site.config.ts`
+is empty and every page body is an HTML comment. Header and footer render
+nothing until you fill in the config.
+
 1. Edit `src/site.config.ts`: title, description, author, nav, social links.
 2. Set `site` in `astro.config.mjs` to your production URL.
-3. Replace the copy in `src/pages/index.astro`, `about.astro`, and `contact.astro`.
-4. Add posts to `src/content/blog/` as Markdown files (see `hello-world.md`).
-5. Swap `public/favicon.svg` and `public/favicon.ico`.
-6. Tweak colors and fonts in `src/styles/global.css`.
+3. Write copy where the `<!-- ... goes here -->` comments are in `src/pages/`.
+4. Add posts to `src/content/blog/` as Markdown with `title` and `pubDate` frontmatter.
+5. Swap the hero photo at `src/assets/hero.jpg` (any size; Astro resizes it).
+6. Swap `public/favicon.svg` and `public/favicon.ico`.
+7. Tweak the palette and fonts in `src/styles/global.css`.
 
 ## Project structure
 
 ```
 src/
-  components/      Header, Footer, BaseHead (meta tags)
+  assets/          Hero photo (optimized at build time)
+  components/      Hero, Header, Footer, BaseHead (meta tags)
   content/blog/    Markdown posts
   content.config.ts  Blog collection schema
   layouts/         BaseLayout wraps every page

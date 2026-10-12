@@ -1,0 +1,44 @@
+---
+import { SITE } from '../site.config';
+---
+
+<div class="masthead">
+  <h1>{SITE.title}</h1>
+  <p class="tagline">{SITE.tagline}</p>
+  <p class="areas">{SITE.areas.join(' · ')}</p>
+</div>
+
+<style>
+  .masthead {
+    color: var(--navy);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2.1rem;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .tagline {
+    margin: 0.4rem 0 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--harbor);
+  }
+  @media (max-width: 48rem) {
+    h1 {
+      font-size: 1.45rem;
+    }
+  }
+  .areas {
+    margin: 0.9rem 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+</style>

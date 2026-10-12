@@ -7,18 +7,24 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 );
 ---
 
-<BaseLayout title="Blog" description="All posts.">
-  <h1>Blog</h1>
-  <ul class="posts">
-    {posts.map((post) => (
-      <li>
-        <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-        <time class="muted" datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}
-        </time>
-      </li>
-    ))}
-  </ul>
+<BaseLayout>
+  <div class="container">
+    <div class="prose">
+      <!-- Blog index heading goes here. -->
+      {posts.length > 0 && (
+        <ul class="posts">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <time class="muted" datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'medium' })}
+              </time>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
@@ -30,7 +36,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     border-bottom: 1px solid var(--border);
   }
 </style>

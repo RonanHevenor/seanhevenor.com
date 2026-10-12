@@ -12,13 +12,15 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article>
-    <h1>{post.data.title}</h1>
-    <p class="muted">
-      <time datetime={post.data.pubDate.toISOString()}>
-        {post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
-      </time>
-    </p>
-    <Content />
-  </article>
+  <div class="container">
+    <article class="prose">
+      <h1>{post.data.title}</h1>
+      <p class="muted">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {post.data.pubDate.toLocaleDateString('en-US', { dateStyle: 'long' })}
+        </time>
+      </p>
+      <Content />
+    </article>
+  </div>
 </BaseLayout>

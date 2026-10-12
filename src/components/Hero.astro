@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import hero from '../assets/hero.jpg';
+---
+
+<section class="hero">
+  <Image
+    src={hero}
+    alt=""
+    widths={[768, 1280, 1920, 2560, 3200, 4032]}
+    sizes="100vw"
+    quality={90}
+    loading="eager"
+    fetchpriority="high"
+  />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    height: clamp(16rem, 38vh, 26rem);
+    overflow: hidden;
+    background: var(--navy);
+  }
+  .hero :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    /* On load the view tilts down from the sky to the harbor. */
+    animation: tilt 5s cubic-bezier(0.3, 0.5, 0.2, 1) both;
+  }
+  @keyframes tilt {
+    from {
+      object-position: 50% 0%;
+    }
+    to {
+      object-position: 50% 20%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero :global(img) {
+      animation: none;
+    }
+  }
+</style>
