@@ -5,7 +5,6 @@ const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
 
 <header>
   <div class="container bar">
-    <span class="brokerage">{SITE.brokerage}</span>
     <nav>
       <a href={tel}>{SITE.phone}</a>
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
@@ -26,15 +25,11 @@ const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
   }
   .bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: baseline;
     gap: 1.5rem;
     padding-top: 1.4rem;
     padding-bottom: 1.4rem;
-  }
-  .brokerage {
-    font-style: italic;
-    white-space: nowrap;
   }
   nav {
     display: flex;
@@ -43,12 +38,11 @@ const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
   }
   @media (max-width: 40rem) {
     .bar {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
+      justify-content: flex-start;
     }
     nav {
-      gap: 1.25rem;
+      flex-direction: column;
+      gap: 0.2rem;
     }
   }
 </style>

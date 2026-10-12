@@ -8,6 +8,8 @@ const year = new Date().getFullYear();
   <div class="container reveal">
     <slot />
     <div class="contact">
+      <span class="name">{SITE.author}</span>
+      <span class="brokerage">{SITE.brokerage}</span>
       <a class="phone" href={tel}>{SITE.phone}</a>
       <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
     </div>
@@ -15,7 +17,6 @@ const year = new Date().getFullYear();
   <footer>
     <div class="container foot">
       <span>&copy; {year} {SITE.author}</span>
-      <span>{SITE.brokerage}</span>
     </div>
   </footer>
 </section>
@@ -39,6 +40,15 @@ const year = new Date().getFullYear();
     margin-top: clamp(2.5rem, 5vw, 4rem);
     padding-bottom: var(--section);
   }
+  .name {
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+  }
+  .brokerage {
+    font-style: italic;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    opacity: 0.85;
+    margin-bottom: 1.25rem;
+  }
   .phone {
     font-size: clamp(1.75rem, 3.2vw, 2.75rem);
     line-height: 1.1;
@@ -54,7 +64,7 @@ const year = new Date().getFullYear();
   }
   .foot {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 0.5rem 2rem;
     padding-top: 1.4rem;
