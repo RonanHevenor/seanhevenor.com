@@ -15,31 +15,23 @@ Then open http://localhost:4321.
 
 ## Make it yours
 
-The site ships with **no text at all**. Every string in `src/site.config.ts`
-is empty and every page body is an HTML comment. Header and footer render
-nothing until you fill in the config.
-
-1. Edit `src/site.config.ts`: title, description, author, nav, social links.
-2. Set `site` in `astro.config.mjs` to your production URL.
-3. Write copy where the `<!-- ... goes here -->` comments are in `src/pages/`.
-4. Add posts to `src/content/blog/` as Markdown with `title` and `pubDate` frontmatter.
-5. Swap the hero photo at `src/assets/hero.jpg` (any size; Astro resizes it).
-6. Swap `public/favicon.svg` and `public/favicon.ico`.
-7. Tweak the palette and fonts in `src/styles/global.css`.
+1. Edit `src/site.config.ts`: name, tagline, brokerage, phone, email, areas.
+2. Edit the four paragraphs in `src/copy/home.md`. Each one is a screen.
+3. Replace the photos in `src/assets/`.
+4. Set `site` in `astro.config.mjs` to the production URL.
 
 ## Project structure
 
 ```
 src/
-  assets/          Hero photo (optimized at build time)
-  components/      Hero, Header, Footer, BaseHead (meta tags)
-  content/blog/    Markdown posts
-  content.config.ts  Blog collection schema
-  layouts/         BaseLayout wraps every page
-  pages/           File-based routes
-  styles/          Global CSS
-  site.config.ts   Site-wide settings
-public/            Static assets served as-is
+  assets/          hero.jpg, harbor.jpg (crop of the hero), portrait.jpg
+  components/      Header, Hero, Tile (photo + text split), Closing, BaseHead
+  copy/home.md     The four bio paragraphs, one per screen
+  layouts/         BaseLayout wraps every page and runs the fade-up script
+  pages/           index.astro and 404.astro
+  styles/          Global CSS and design tokens
+  site.config.ts   Name, tagline, brokerage, phone, email, areas
+public/            Favicons and static files
 ```
 
 ## Commands

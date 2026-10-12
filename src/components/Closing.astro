@@ -1,0 +1,63 @@
+---
+import { SITE } from '../site.config';
+const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
+const year = new Date().getFullYear();
+---
+
+<section class="closing">
+  <div class="container reveal">
+    <slot />
+    <div class="contact">
+      <a class="phone" href={tel}>{SITE.phone}</a>
+      <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </div>
+  </div>
+  <footer>
+    <div class="container foot">
+      <span>&copy; {year} {SITE.author}</span>
+      <span>{SITE.brokerage}</span>
+    </div>
+  </footer>
+</section>
+
+<style>
+  .closing {
+    background: var(--navy);
+    color: var(--white);
+    padding-top: var(--section);
+  }
+  .closing :global(p) {
+    max-width: 44rem;
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+    line-height: 1.45;
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: var(--section);
+  }
+  .phone {
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    line-height: 1.1;
+  }
+  .email {
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    opacity: 0.85;
+  }
+  footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 0.85rem;
+    opacity: 0.75;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+  }
+</style>

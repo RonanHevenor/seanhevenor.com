@@ -1,30 +1,17 @@
 ---
 import { SITE } from '../site.config';
-const current = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? current === '/' : current.startsWith(href);
-const showBrand = Boolean(SITE.title) && current !== '/';
-const hasContent = showBrand || SITE.nav.length > 0;
+const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
 ---
 
-{hasContent && (
-  <header>
-    <nav class="container">
-      {showBrand && <a class="brand" href="/">{SITE.title}</a>}
-      {SITE.nav.length > 0 && (
-        <ul>
-          {SITE.nav.map((item) => (
-            <li>
-              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+<header>
+  <div class="container bar">
+    <span class="brokerage">{SITE.brokerage}</span>
+    <nav>
+      <a href={tel}>{SITE.phone}</a>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
     </nav>
-  </header>
-)}
+  </div>
+</header>
 
 <style>
   header {
@@ -33,44 +20,35 @@ const hasContent = showBrand || SITE.nav.length > 0;
     left: 0;
     right: 0;
     z-index: 2;
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    color: var(--white);
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding-top: 1.4rem;
+    padding-bottom: 1.4rem;
+  }
+  .brokerage {
+    font-style: italic;
+    white-space: nowrap;
   }
   nav {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-  .brand {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 1.1rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: inherit;
-  }
-  ul {
-    list-style: none;
-    display: flex;
     gap: 1.75rem;
-    margin: 0;
-    padding: 0;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    white-space: nowrap;
   }
-  li a {
-    color: inherit;
-    opacity: 0.85;
-  }
-  li a:hover,
-  li a[aria-current='page'] {
-    opacity: 1;
-    text-decoration: none;
-    border-bottom: 1px solid var(--brass);
+  @media (max-width: 40rem) {
+    .bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+    nav {
+      gap: 1.25rem;
+    }
   }
 </style>

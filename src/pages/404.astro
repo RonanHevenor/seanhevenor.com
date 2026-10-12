@@ -1,11 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site.config';
 ---
 
 <BaseLayout>
-  <div class="container">
-    <div class="prose">
-      <!-- 404 copy goes here. -->
-    </div>
+  <div class="container nf">
+    <a href="/">{SITE.title}</a>
   </div>
 </BaseLayout>
+
+<style>
+  .nf {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+</style>

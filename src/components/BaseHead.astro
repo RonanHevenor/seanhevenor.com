@@ -24,6 +24,9 @@ const schema = {
   description: SITE.tagline,
   url: Astro.site?.toString(),
   image: ogImage.toString(),
+  telephone: '+1-' + SITE.phone,
+  email: SITE.email,
+  parentOrganization: { '@type': 'Organization', name: SITE.brokerage },
   areaServed: [...SITE.areas, ...SITE.alsoServes].map((name) => ({ '@type': 'Place', name })),
 };
 ---

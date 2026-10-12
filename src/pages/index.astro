@@ -1,75 +1,49 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import Masthead from '../components/Masthead.astro';
+import Tile from '../components/Tile.astro';
+import Closing from '../components/Closing.astro';
+import harbor from '../assets/harbor.jpg';
 import portrait from '../assets/portrait.jpg';
-import { Content, frontmatter } from '../copy/home.md';
+import { frontmatter, rawContent } from '../copy/home.md';
 import { SITE } from '../site.config';
+
+// home.md holds four paragraphs. Each gets its own screen, in order:
+// statement, the place, the person, the close.
+const [statement, place, person, close] = rawContent().trim().split(/\n\s*\n/);
 ---
 
 <BaseLayout pageTitle={frontmatter.title} description={frontmatter.description}>
+  <Header />
   <Hero />
-  <div class="over">
-    <div class="container profile">
-      <aside class="side">
-        <Image src={portrait} alt={SITE.title} width={300} height={400} densities={[1, 2]} />
-        <Masthead />
-      </aside>
-      <section class="bio">
-        <Content />
-      </section>
+
+  <section class="statement">
+    <div class="container reveal">
+      <p>{statement}</p>
     </div>
-  </div>
+  </section>
+
+  <Tile image={harbor} side="left" ratio="5 / 4">
+    <p>{place}</p>
+  </Tile>
+
+  <Tile image={portrait} alt={SITE.title} side="right" ratio="1 / 1" position="50% 30%">
+    <p>{person}</p>
+  </Tile>
+
+  <Closing>
+    <p>{close}</p>
+  </Closing>
 </BaseLayout>
 
 <style>
-  .over {
-    background: var(--bg);
+  .statement {
+    padding: var(--section) 0;
   }
-  .profile {
-    display: grid;
-    grid-template-columns: 18rem minmax(0, 40rem);
-    justify-content: center;
-    column-gap: clamp(2.5rem, 6vw, 5rem);
-    padding-top: clamp(3rem, 7vw, 6rem);
-    padding-bottom: clamp(4rem, 8vw, 7rem);
-  }
-  .side {
-    position: sticky;
-    top: 3rem;
-    align-self: start;
-  }
-  .side :global(img) {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1.5rem;
-  }
-  .bio {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-  .bio :global(p) {
-    margin: 0 0 1.5rem;
-  }
-  .bio :global(p:last-child) {
-    margin-bottom: 0;
-  }
-  @media (max-width: 48rem) {
-    .profile {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 2.5rem;
-    }
-    .side {
-      position: static;
-      display: grid;
-      grid-template-columns: 7.5rem 1fr;
-      column-gap: 1.25rem;
-      align-items: center;
-    }
-    .side :global(img) {
-      margin: 0;
-    }
+  .statement p {
+    max-width: 58rem;
+    font-size: clamp(1.5rem, 2.7vw, 2.3rem);
+    line-height: 1.4;
   }
 </style>
