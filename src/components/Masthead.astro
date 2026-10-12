@@ -14,7 +14,6 @@ const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
       <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
     </nav>
   </div>
-  <div class="container"><hr /></div>
 </header>
 
 <style>
@@ -23,8 +22,8 @@ const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
     justify-content: space-between;
     align-items: flex-end;
     gap: 2rem;
-    padding-top: clamp(1.75rem, 4vw, 3rem);
-    padding-bottom: 1.25rem;
+    padding-top: clamp(2rem, 4.5vw, 3.5rem);
+    padding-bottom: 0;
   }
   h1 {
     margin: 0;
@@ -48,11 +47,6 @@ const tel = `tel:+1${SITE.phone.replace(/\D/g, '')}`;
     font-size: 0.95rem;
     line-height: 1.5;
     white-space: nowrap;
-  }
-  hr {
-    margin: 0;
-    border: 0;
-    border-top: 1px solid var(--line);
   }
   @media (max-width: 40rem) {
     .row {

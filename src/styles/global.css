@@ -7,13 +7,14 @@
   --white: #ffffff;
   --mist: #f5f7f9;
   --muted: #5b6b7d;
-  --line: #dfe4ea;
 
   --font: 'Libre Baskerville', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
 
-  --max: 88rem;
+  --max: 70rem;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --section: clamp(3rem, 5.5vw, 5rem);
+  --space: clamp(3rem, 6vw, 5.5rem);
+  --col: clamp(12rem, 20vw, 17rem);
+  --colgap: clamp(2rem, 5vw, 5rem);
 }
 
 *,
@@ -47,6 +48,27 @@ main {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 var(--gutter);
+}
+
+/* Shared grid: a narrow photo column, then the text column.
+   All body text starts at the same x. */
+.grid {
+  display: grid;
+  grid-template-columns: var(--col) minmax(0, 40rem);
+  column-gap: var(--colgap);
+  align-items: start;
+}
+.grid > .text {
+  grid-column: 2;
+}
+@media (max-width: 48rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
+  }
+  .grid > .text {
+    grid-column: 1;
+  }
 }
 
 a {

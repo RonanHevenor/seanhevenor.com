@@ -5,6 +5,8 @@ import Tile from '../components/Tile.astro';
 import Closing from '../components/Closing.astro';
 import harbor from '../assets/harbor.jpg';
 import portrait from '../assets/portrait.jpg';
+import { Image } from 'astro:assets';
+import aerial from '../assets/hero.jpg';
 import { frontmatter, rawContent } from '../copy/home.md';
 import { SITE } from '../site.config';
 
@@ -16,29 +18,65 @@ const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
 <BaseLayout pageTitle={frontmatter.title} description={frontmatter.description}>
   <Masthead />
 
-  <Tile image={portrait} alt={SITE.title} side="left" ratio="4 / 5" position="50% 20%" eager reveal={false} small>
+  <Tile image={portrait} alt={SITE.title} ratio="4 / 5" position="50% 20%" eager reveal={false}>
     <p>{person}</p>
   </Tile>
 
-  <Tile image={harbor} side="right" ratio="4 / 3">
+  <Tile image={harbor} ratio="4 / 3">
     <p>{place}</p>
   </Tile>
 
-  <section class="container statement reveal">
-    <p>{statement}</p>
-  </section>
+  <div class="finale">
+    <Image
+      class="backdrop"
+      src={aerial}
+      alt=""
+      widths={[768, 1280, 1920, 2560]}
+      sizes="100vw"
+      quality={80}
+      loading="lazy"
+    />
+    <div class="veil" aria-hidden="true"></div>
 
-  <Closing>
-    <p>{close}</p>
-  </Closing>
+    <section class="container grid statement reveal">
+      <p class="text">{statement}</p>
+    </section>
+
+    <Closing>
+      <p>{close}</p>
+    </Closing>
+  </div>
 </BaseLayout>
 
 <style>
   .statement {
-    padding-top: clamp(1.5rem, 3vw, 2.5rem);
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+    padding-top: var(--space);
   }
-  .statement p {
-    max-width: 40rem;
+  /* The last two paragraphs sit on a whitened copy of the aerial. */
+  .finale {
+    position: relative;
+    margin-top: var(--space);
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .finale :global(.backdrop) {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 55%;
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.9) 22%,
+      rgba(255, 255, 255, 0.84) 100%
+    );
   }
 </style>

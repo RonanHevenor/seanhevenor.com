@@ -5,38 +5,32 @@ const year = new Date().getFullYear();
 ---
 
 <section class="closing">
-  <div class="container reveal">
-    <slot />
-    <div class="contact">
-      <span class="name">{SITE.author}</span>
-      <span class="brokerage">{SITE.brokerage}</span>
-      <a class="phone" href={tel}>{SITE.phone}</a>
-      <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+  <div class="container grid reveal">
+    <div class="text">
+      <slot />
+      <div class="contact">
+        <span class="name">{SITE.author}</span>
+        <span class="brokerage">{SITE.brokerage}</span>
+        <a class="phone" href={tel}>{SITE.phone}</a>
+        <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </div>
     </div>
   </div>
-  <footer>
-    <div class="container foot">
-      <span>&copy; {year} {SITE.author}</span>
-    </div>
-  </footer>
+  <div class="container grid foot">
+    <span class="text">&copy; {year} {SITE.author}</span>
+  </div>
 </section>
 
 <style>
   .closing {
-    background: var(--navy);
-    color: var(--white);
-    padding-top: clamp(3rem, 5.5vw, 4.5rem);
-  }
-  .closing :global(p) {
-    max-width: 40rem;
+    padding-top: var(--space);
+    padding-bottom: 2rem;
   }
   .contact {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.35rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    padding-bottom: clamp(3rem, 5.5vw, 4.5rem);
+    margin-top: var(--space);
   }
   .name {
     font-size: clamp(1.3rem, 2vw, 1.7rem);
@@ -54,18 +48,11 @@ const year = new Date().getFullYear();
   .email {
     font-size: clamp(1.05rem, 1.5vw, 1.3rem);
     opacity: 0.85;
-  }
-  footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-    font-size: 0.85rem;
-    opacity: 0.75;
+    margin-top: 0.35rem;
   }
   .foot {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 0.5rem 2rem;
-    padding-top: 1.4rem;
-    padding-bottom: 1.4rem;
+    margin-top: var(--space);
+    font-size: 0.85rem;
+    opacity: 0.75;
   }
 </style>
