@@ -9,4 +9,6 @@ export const SITE = {
   brokerage: 'Rhode Island Real Estate Services',
   phone: '401-499-5700',
   email: 'sean@sellrhody.com',
+  // How the address is shown on the page. The mailto link and search data keep the lowercase form.
+  emailDisplay: 'Sean@SellRhody.com',
 };

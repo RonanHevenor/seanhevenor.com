@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
         <span class="name">{SITE.author}</span>
         <span class="brokerage">{SITE.brokerage}</span>
         <a class="phone" href={tel}>{SITE.phone}</a>
-        <a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a class="email" href={`mailto:${SITE.email}`}>{SITE.emailDisplay}</a>
       </div>
     </div>
   </div>
@@ -41,14 +41,10 @@ const year = new Date().getFullYear();
     opacity: 0.85;
     margin-bottom: 1.25rem;
   }
-  .phone {
-    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
-    line-height: 1.1;
-  }
+  .phone,
   .email {
     font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-    opacity: 0.85;
-    margin-top: 0.35rem;
+    line-height: 1.5;
   }
   .foot {
     margin-top: var(--space);
