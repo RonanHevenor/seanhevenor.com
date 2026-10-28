@@ -9,9 +9,11 @@ import aerial from '../assets/hero.jpg';
 import { frontmatter, rawContent } from '../copy/home.md';
 import { SITE } from '../site.config';
 
-// home.md holds four paragraphs, in order:
-// the person (with portrait), the place, a statement, the close.
-const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
+// home.md: the first two paragraphs sit beside the portrait, the last is the
+// close, and everything between runs on the whitened backdrop.
+const paras = rawContent().trim().split(/\n+/).map((p) => p.trim()).filter(Boolean);
+const [person, place, ...rest] = paras;
+const close = rest.pop();
 ---
 
 <BaseLayout pageTitle={frontmatter.title} description={frontmatter.description}>
@@ -35,7 +37,9 @@ const [person, place, statement, close] = rawContent().trim().split(/\n\s*\n/);
     <div class="veil" aria-hidden="true"></div>
 
     <section class="container grid statement reveal">
-      <p class="text">{statement}</p>
+      <div class="text stack">
+        {rest.map((p) => <p>{p}</p>)}
+      </div>
     </section>
 
     <Closing>
